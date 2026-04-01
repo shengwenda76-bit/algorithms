@@ -1,0 +1,107 @@
+{
+    "code": "missing_value",
+    "title": "缺失值处理",
+    "description": "对结构化表格数据中的缺失值进行填充或删行处理，支持数值字段与时间字段分别配置不同的处理策略。",
+    "version": "2.0.0",
+    "dependencies": [
+        "pandas>=2.0.0",
+        "numpy>=1.24.0"
+    ],
+    "dataCalcType": "ROW_IN_ROW_OUT",
+    "updateField": [
+        {
+            "fieldCode": "numColumns",
+            "fieldTitle": "数值列",
+            "fieldDataType": "Number"
+        },
+        {
+            "fieldCode": "timeColumns",
+            "fieldTitle": "时间列",
+            "fieldDataType": "Time"
+        }
+    ],
+    "createField": [],
+    "groupField": [],
+    "valueField": [
+        {
+            "fieldCode": "missingValueMethod",
+            "fieldTitle": "缺失值处理方法",
+            "fieldDataType": "Enum",
+            "required": true,
+            "enumConfig": [
+                {
+                    "code": "delete",
+                    "name": {
+                        "en": "Delete",
+                        "cn": "删除"
+                    }
+                },
+                {
+                    "code": "fill",
+                    "name": {
+                        "en": "Fill",
+                        "cn": "填充"
+                    }
+                }
+            ]
+        },
+        {
+            "fieldCode": "fillMethod",
+            "fieldTitle": "填充方法",
+            "fieldDataType": "Enum",
+            "required": true,
+            "enumConfig": [
+                {
+                    "code": "mean",
+                    "name": {
+                        "en": "Mean",
+                        "cn": "均值"
+                    }
+                },
+                {
+                    "code": "median",
+                    "name": {
+                        "en": "Median",
+                        "cn": "中位数"
+                    }
+                },
+                {
+                    "code": "mode",
+                    "name": {
+                        "en": "Mode",
+                        "cn": "众数"
+                    }
+                },
+                {
+                    "code": "forward_fill",
+                    "name": {
+                        "en": "Forward Fill",
+                        "cn": "前值填充"
+                    }
+                },
+                {
+                    "code": "backward_fill",
+                    "name": {
+                        "en": "Backward Fill",
+                        "cn": "后值填充"
+                    }
+                },
+                {
+                    "code": "constant",
+                    "name": {
+                        "en": "Constant",
+                        "cn": "固定值"
+                    }
+                }
+            ],
+            "dependsOn": "missingValueMethod=='fill'"
+        },
+        {
+            "fieldCode": "fillConstant",
+            "fieldTitle": "指定值常数",
+            "fieldDataType": "Number",
+            "required": false,
+            "dependsOn": "fillMethod=='constant'"
+        }
+    ]
+}
